@@ -59,6 +59,7 @@ class NotificationPage extends StatelessWidget {
                 Text("Rs. 60,000/-", style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 16, color: const Color(0xFFFC8955))),
               ],
             ),
+            const SizedBox(height: 14),
             Container(
               width: double.infinity,
               height: 137,
@@ -112,6 +113,14 @@ class NotificationPage extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+            const SizedBox(height: 26),
+            Row(
+              children: [
+                Image.asset("assets/images/profile_big.png"),
+                const SizedBox(width: 17,),
+                Text("Traveller Information", style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 14)),
+              ],
             )
           ],
         ),
