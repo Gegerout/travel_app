@@ -22,7 +22,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final pages = [
       HomeWidget(name: widget.name, image: widget.image),
-      ListingPage(),
+      ListingPage(image: widget.image,),
       NotificationPage(),
       ProfilePage()
     ];
