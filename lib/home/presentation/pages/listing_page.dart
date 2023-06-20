@@ -84,6 +84,7 @@ class ListingPage extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 17),
               Padding(
                 padding: const EdgeInsets.only(left: 27, right: 27),
                 child: SizedBox(
@@ -362,7 +363,8 @@ class ListingPage extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              const SizedBox(height: 25),
             ],
           ),
         ));
