@@ -130,7 +130,7 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                       onPressed: () {
                         ref.read(signinProvider.notifier).loginUser(nameCont.text, passwordCont.text).then((value) {
                           if(value != null) {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(name: value.firstName,)));
                           }
                           else {
                             showDialog(context: context, builder: (context) => AlertDialog(
