@@ -69,6 +69,9 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                   ),
                   child: TextFormField(
                     controller: nameCont,
+                    onChanged: (value) {
+                      ref.read(signinProvider.notifier).checkCreds(value, passwordCont.text);
+                    },
                     style: GoogleFonts.nunito(
                         fontWeight: FontWeight.w400, fontSize: 15),
                     decoration: InputDecoration(
@@ -93,6 +96,9 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                   child: TextFormField(
                     controller: passwordCont,
                     obscureText: !isVisible,
+                    onChanged: (value) {
+                      ref.read(signinProvider.notifier).checkCreds(nameCont.text, value);
+                    },
                     style: GoogleFonts.nunito(
                         fontWeight: FontWeight.w400, fontSize: 15),
                     decoration: InputDecoration(
@@ -130,34 +136,63 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                   height: 50,
                   child: ElevatedButton(
                       onPressed: () {
-                        ref
-                            .read(signinProvider.notifier)
-                            .loginUser(nameCont.text, passwordCont.text)
-                            .then((value) {
-                          if (value != null) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage(
-                                          name: value.firstName,
-                                          image: value.image,
-                                        )));
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                      title: const Text("Wrong credentials"),
-                                      actions: [
-                                        ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text("Ok"))
-                                      ],
-                                    ));
-                          }
-                        });
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => LoadingPage(nameCont.text, passwordCont.text)));
+                        if(ref.watch(signinProvider).isValid) {
+                          ref
+                              .read(signinProvider.notifier)
+                              .loginUser(nameCont.text, passwordCont.text)
+                              .then((value) {
+                            if (value != null) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage(
+                                        name: value.firstName,
+                                        image: value.image,
+                                      )));
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: const Text("Wrong credentials"),
+                                    actions: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("Ok"))
+                                    ],
+                                  ));
+                            }
+                          });
+                        }
+                        if(!ref.watch(signinProvider).isName) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text("Wrong username"),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text("Ok"))
+                                ],
+                              ));
+                        }
+                        else if(!ref.watch(signinProvider).isPassword) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text("Wrong password"),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text("Ok"))
+                                ],
+                              ));
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
