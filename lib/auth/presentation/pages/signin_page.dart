@@ -47,13 +47,15 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                   height: 353,
                   child: Stack(
                     children: [
-                      Image.asset("assets/images/signin_image.png",),
-                     Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Text("Voyage",
-                              style: GoogleFonts.qwigley(
-                                  fontWeight: FontWeight.w400, fontSize: 96)),
-                        ),
+                      Image.asset(
+                        "assets/images/signin_image.png",
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text("Voyage",
+                            style: GoogleFonts.qwigley(
+                                fontWeight: FontWeight.w400, fontSize: 96)),
+                      ),
                     ],
                   ),
                 ),
@@ -128,19 +130,31 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                   height: 50,
                   child: ElevatedButton(
                       onPressed: () {
-                        ref.read(signinProvider.notifier).loginUser(nameCont.text, passwordCont.text).then((value) {
-                          if(value != null) {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(name: value.firstName,)));
-                          }
-                          else {
-                            showDialog(context: context, builder: (context) => AlertDialog(
-                              title: const Text("Wrong credentials"),
-                              actions: [
-                                ElevatedButton(onPressed: () {
-                                  Navigator.pop(context);
-                                }, child: const Text("Ok"))
-                              ],
-                            ));
+                        ref
+                            .read(signinProvider.notifier)
+                            .loginUser(nameCont.text, passwordCont.text)
+                            .then((value) {
+                          if (value != null) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage(
+                                          name: value.firstName,
+                                          image: value.image,
+                                        )));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title: const Text("Wrong credentials"),
+                                      actions: [
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text("Ok"))
+                                      ],
+                                    ));
                           }
                         });
                         //Navigator.push(context, MaterialPageRoute(builder: (context) => LoadingPage(nameCont.text, passwordCont.text)));
@@ -175,11 +189,12 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                     TextButton(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                        padding: const EdgeInsets.only(left: 5)
-                      ),
+                          padding: const EdgeInsets.only(left: 5)),
                       child: Text("Create now",
                           style: GoogleFonts.nunito(
-                              fontWeight: FontWeight.w600, fontSize: 15, color: Colors.black)),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
+                              color: Colors.black)),
                     )
                   ],
                 )

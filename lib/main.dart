@@ -19,15 +19,15 @@ class MyApp extends ConsumerWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+          //useMaterial3: true,
         ),
         home: Scaffold(
           body: ref.watch(mainProvider).when(
               data: (value) {
                 if(value != null) {
-                  return HomePage(name: value.data.firstName,);
+                  return HomePage(name: value.data.firstName, image: value.data.image,);
                 }
-                return SigninPage();
+                return const SigninPage();
               },
               error: (error, stacktrace) {
                 return Center(
