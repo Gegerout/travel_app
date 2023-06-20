@@ -1,8 +1,113 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travel_app/home/presentation/pages/listing_page.dart';
+import 'package:travel_app/home/presentation/pages/notification_page.dart';
+import 'package:travel_app/home/presentation/pages/profile_page.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key, required this.name, required this.image})
+class HomePage extends ConsumerStatefulWidget {
+  const HomePage({Key? key, required this.name, required this.image}) : super(key: key);
+
+  final String name;
+  final String image;
+
+  @override
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
+  int currentPage = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final pages = [
+      HomeWidget(name: widget.name, image: widget.image),
+      ListingPage(),
+      NotificationPage(),
+      ProfilePage()
+    ];
+
+    return Scaffold(
+      body: pages.elementAt(currentPage),
+      bottomNavigationBar: Container(
+        height: 69,
+        decoration: const BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              onTap: () {
+                setState(() {
+                  currentPage = 0;
+                });
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(currentPage == 0 ? "assets/images/home_active.png" : "assets/images/home.png"),
+                  const SizedBox(height: 2),
+                  Text("Home", style: GoogleFonts.nunito(fontWeight: FontWeight.w600, fontSize: 10, color: Colors.white)),
+                ],
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  currentPage = 1;
+                });
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(currentPage == 1 ? "assets/images/listing_active.png" : "assets/images/listing.png"),
+                  const SizedBox(height: 2),
+                  Text("Listing", style: GoogleFonts.nunito(fontWeight: FontWeight.w600, fontSize: 10, color: Colors.white)),
+                ],
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  currentPage = 2;
+                });
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(currentPage == 2 ? "assets/images/notif_active.png" : "assets/images/notif.png"),
+                  const SizedBox(height: 2),
+                  Text("Notification", style: GoogleFonts.nunito(fontWeight: FontWeight.w600, fontSize: 10, color: Colors.white)),
+                ],
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  currentPage = 3;
+                });
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(currentPage == 3 ? "assets/images/profile_active.png" : "assets/images/profile.png"),
+                  const SizedBox(height: 2),
+                  Text("Profile", style: GoogleFonts.nunito(fontWeight: FontWeight.w600, fontSize: 10, color: Colors.white)),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class HomeWidget extends StatelessWidget {
+  const HomeWidget({Key? key, required this.name, required this.image})
       : super(key: key);
 
   final String name;
