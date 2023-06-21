@@ -88,7 +88,7 @@ class ListingPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 27, right: 27),
                 child: SizedBox(
-                  height: 380,
+                  height: 400,
                   child: MasonryGridView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       gridDelegate:
@@ -105,6 +105,9 @@ class ListingPage extends StatelessWidget {
                                 alignment: Alignment.center,
                                 child: Image.asset(
                                   images[index],
+                                  width: index == 3 ? 175 : null,
+                                  height: index == 3 ? 120 : null,
+                                  fit: index == 3 ? BoxFit.fill : null,
                                 ),
                               ),
                               Column(
@@ -131,7 +134,9 @@ class ListingPage extends StatelessWidget {
                                               ))),
                                     ),
                                   ),
-                                  SizedBox(height: index == 1 || index == 3 ? 40 : 135),
+                                  SizedBox(height: index == 1 || index == 3 ? 35 : 145),
+                                  SizedBox(height: index == 0 ? 14 : 0,),
+                                  SizedBox(height: index == 1 ? 14 : 0,),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 17),
                                     child: Align(

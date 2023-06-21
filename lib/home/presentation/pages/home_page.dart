@@ -106,12 +106,19 @@ class _HomePageState extends ConsumerState<HomePage> {
 }
 
 
-class HomeWidget extends StatelessWidget {
+class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key, required this.name, required this.image})
       : super(key: key);
 
   final String name;
   final String image;
+
+  @override
+  State<HomeWidget> createState() => _HomeWidgetState();
+}
+
+class _HomeWidgetState extends State<HomeWidget> {
+  int currentButton = 7;
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +156,7 @@ class HomeWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Hello $name!!",
+              Text("Hello ${widget.name}!!",
                   style: GoogleFonts.nunito(
                       fontWeight: FontWeight.w700, fontSize: 20, color: Colors.black)),
               Text("Where do you want to go?",
@@ -168,7 +175,7 @@ class HomeWidget extends StatelessWidget {
               height: 58,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
-                  child: Image.network(image)),
+                  child: Image.network(widget.image)),
             ),
           )
         ],
@@ -217,18 +224,25 @@ class HomeWidget extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(right: 9),
-                      child: Container(
-                        width: 97,
-                        height: 35,
-                        decoration: BoxDecoration(
-                            color: const Color(0xFFF5F5F5),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Center(
-                          child: Text(values[index],
-                              style: GoogleFonts.nunito(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
-                                  color: Colors.black.withOpacity(0.63))),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            currentButton = index;
+                          });
+                        },
+                        child: Container(
+                          width: 97,
+                          height: 35,
+                          decoration: BoxDecoration(
+                              color: currentButton == index ? const Color(0xFFFC8955) : const Color(0xFFF5F5F5),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Center(
+                            child: Text(values[index],
+                                style: GoogleFonts.nunito(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14,
+                                    color: Colors.black.withOpacity(0.63))),
+                          ),
                         ),
                       ),
                     );
@@ -271,7 +285,7 @@ class HomeWidget extends StatelessWidget {
                                 image: AssetImage(images[index])),
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 12, bottom: 8),
+                          padding: const EdgeInsets.only(left: 12, bottom: 16),
                           child: Align(
                               alignment: Alignment.bottomLeft,
                               child: Text(texts[index],
