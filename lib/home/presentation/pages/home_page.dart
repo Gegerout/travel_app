@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travel_app/core/states/main_state.dart';
 import 'package:travel_app/home/presentation/pages/listing_page.dart';
 import 'package:travel_app/home/presentation/pages/notification_page.dart';
 import 'package:travel_app/home/presentation/pages/profile_page.dart';
@@ -31,6 +34,12 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   int currentPage = 0;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   ref.refresh(mainProvider).value;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -168,6 +177,18 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
   int currentButton = 7;
+  bool isFile = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.image.contains("/cache/")) {
+      isFile = true;
+    }
+    else {
+      isFile = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -224,9 +245,12 @@ class _HomeWidgetState extends State<HomeWidget> {
             child: SizedBox(
               width: 58,
               height: 58,
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.network(widget.image)),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 15, top: 15),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: isFile ? Image.file(File(widget.image), fit: BoxFit.fill,) : Image.network(widget.image)),
+              ),
             ),
           )
         ],

@@ -1,15 +1,35 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/home/presentation/states/notif_state.dart';
 
-class NotificationPage extends ConsumerWidget {
+class NotificationPage extends ConsumerStatefulWidget {
   const NotificationPage({Key? key, required this.image}) : super(key: key);
 
   final String image;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<NotificationPage> createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends ConsumerState<NotificationPage> {
+  bool isFile = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.image.contains("/cache/")) {
+      isFile = true;
+    }
+    else {
+      isFile = false;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -33,9 +53,12 @@ class NotificationPage extends ConsumerWidget {
               child: SizedBox(
                 width: 58,
                 height: 58,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.network(image)),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 15, top: 15),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: isFile ? Image.file(File(widget.image), fit: BoxFit.fill,) : Image.network(widget.image)),
+                ),
               ),
             )
           ],

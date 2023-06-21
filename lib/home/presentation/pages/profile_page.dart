@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/core/states/main_state.dart';
+import 'package:travel_app/home/presentation/pages/camera_page.dart';
 import 'package:travel_app/home/presentation/states/profile_state.dart';
 
 class ProfilePage extends ConsumerStatefulWidget {
@@ -32,6 +35,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   late TextEditingController nameCont;
   late TextEditingController surnameCont;
   late TextEditingController emailCont;
+  bool isFile = false;
 
   @override
   void initState() {
@@ -39,6 +43,12 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
     nameCont = TextEditingController(text: widget.name);
     surnameCont = TextEditingController(text: widget.surname);
     emailCont = TextEditingController(text: widget.email);
+    if (widget.image.contains("/cache/")) {
+      isFile = true;
+    } else {
+      isFile = false;
+    }
+    //ref.refresh(mainProvider);
   }
 
   @override
@@ -67,28 +77,57 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                  child: Stack(
-                    children: [
-                      Center(
-                          child: Image.asset(
-                        "assets/images/ellipse.png",
-                        width: 175,
-                        height: 175,
-                        fit: BoxFit.fill,
-                      )),
-                      Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.network(
-                            widget.image,
-                            width: 145,
-                            height: 145,
-                            fit: BoxFit.fill,
+                InkWell(
+                  onTap: () async {
+                    final bool result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CameraPage(
+                                  name: widget.name,
+                                  surname: widget.surname,
+                                  image: widget.image,
+                                  email: widget.email,
+                                  username: widget.username,
+                                  gender: widget.gender,
+                                  token: widget.token,
+                                )));
+                    if (result) {
+                      ref.refresh(mainProvider);
+                    }
+                  },
+                  child: Center(
+                    child: Stack(
+                      children: [
+                        Center(
+                            child: Image.asset(
+                          "assets/images/ellipse.png",
+                          width: 175,
+                          height: 175,
+                          fit: BoxFit.fill,
+                        )),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(70),
+                              child: isFile
+                                  ? Image.file(
+                                      File(widget.image),
+                                      width: 145,
+                                      height: 145,
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.network(
+                                      widget.image,
+                                      width: 145,
+                                      height: 145,
+                                      fit: BoxFit.fill,
+                                    ),
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Text("Personal Details",
@@ -119,13 +158,19 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(
-                              color: ref.watch(profileProvider).isName ? Colors.black.withOpacity(0.63) : Colors.red,
-                            ),),
-                          enabledBorder: ref.watch(profileProvider).isName ? null : OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                            ),),
+                              color: ref.watch(profileProvider).isName
+                                  ? Colors.black.withOpacity(0.63)
+                                  : Colors.red,
+                            ),
+                          ),
+                          enabledBorder: ref.watch(profileProvider).isName
+                              ? null
+                              : OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                    color: Colors.red,
+                                  ),
+                                ),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black.withOpacity(0.63),
@@ -143,7 +188,9 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       child: TextFormField(
                         controller: surnameCont,
                         onChanged: (value) {
-                          ref.read(profileProvider.notifier).checkSurname(value);
+                          ref
+                              .read(profileProvider.notifier)
+                              .checkSurname(value);
                         },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
@@ -155,13 +202,19 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(
-                              color: ref.watch(profileProvider).isSurname ? Colors.black.withOpacity(0.63) : Colors.red,
-                            ),),
-                          enabledBorder: ref.watch(profileProvider).isSurname ? null : OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(
-                              color: Colors.red,
-                            ),),
+                              color: ref.watch(profileProvider).isSurname
+                                  ? Colors.black.withOpacity(0.63)
+                                  : Colors.red,
+                            ),
+                          ),
+                          enabledBorder: ref.watch(profileProvider).isSurname
+                              ? null
+                              : OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: const BorderSide(
+                                    color: Colors.red,
+                                  ),
+                                ),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color:
@@ -324,13 +377,19 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(
-                          color: ref.watch(profileProvider).isEmail ? Colors.black.withOpacity(0.63) : Colors.red,
-                        ),),
-                      enabledBorder: ref.watch(profileProvider).isEmail ? null : OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(
-                          color: Colors.red,
-                        ),),
+                          color: ref.watch(profileProvider).isEmail
+                              ? Colors.black.withOpacity(0.63)
+                              : Colors.red,
+                        ),
+                      ),
+                      enabledBorder: ref.watch(profileProvider).isEmail
+                          ? null
+                          : OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: const Color(0xFF8B8B8B).withOpacity(0.44),
@@ -396,17 +455,19 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: ref.watch(profileProvider).isValid ? () {
-                      ref.read(profileProvider.notifier).updateUser(
-                          nameCont.text,
-                          surnameCont.text,
-                          widget.image,
-                          widget.gender,
-                          emailCont.text,
-                          widget.username,
-                          widget.token);
-                      ref.refresh(mainProvider).value;
-                    } : null,
+                    onPressed: ref.watch(profileProvider).isValid
+                        ? () {
+                            ref.read(profileProvider.notifier).updateUser(
+                                nameCont.text,
+                                surnameCont.text,
+                                widget.image,
+                                widget.gender,
+                                emailCont.text,
+                                widget.username,
+                                widget.token);
+                            ref.refresh(mainProvider).value;
+                          }
+                        : null,
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +14,19 @@ class ListingPage extends StatefulWidget {
 }
 
 class _ListingPageState extends State<ListingPage> {
+  bool isFile = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.image.contains("/cache/")) {
+      isFile = true;
+    }
+    else {
+      isFile = false;
+    }
+  }
+
   List images = [
     "assets/images/dest_1.png",
     "assets/images/dest_2.png",
@@ -52,9 +67,12 @@ class _ListingPageState extends State<ListingPage> {
               child: SizedBox(
                 width: 58,
                 height: 58,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.network(widget.image)),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 15, top: 15),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: isFile ? Image.file(File(widget.image), fit: BoxFit.fill,) : Image.network(widget.image)),
+                ),
               ),
             )
           ],

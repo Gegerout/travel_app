@@ -1,10 +1,15 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travel_app/auth/presentation/pages/signin_page.dart';
 import 'package:travel_app/core/states/main_state.dart';
 import 'package:travel_app/home/presentation/pages/home_page.dart';
 
-void main() {
+late List<CameraDescription> cameras;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(const ProviderScope(child: MyApp()));
 }
 
