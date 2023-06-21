@@ -18,6 +18,10 @@ class MyApp extends ConsumerWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: const AppBarTheme(
+            toolbarHeight: 100
+          ),
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           //useMaterial3: true,
         ),
@@ -25,6 +29,7 @@ class MyApp extends ConsumerWidget {
           body: ref.watch(mainProvider).when(
               data: (value) {
                 if(value != null) {
+                  //return SigninPage();
                   return HomePage(name: value.data.firstName, image: value.data.image,);
                 }
                 return const SigninPage();

@@ -40,7 +40,7 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                       style: GoogleFonts.nunito(
                           fontWeight: FontWeight.w700,
                           fontSize: 25,
-                          color: Colors.black.withOpacity(0.5))),
+                          color: Colors.black.withOpacity(0.5), letterSpacing: 5)),
                 ),
                 SizedBox(
                   width: double.infinity,
