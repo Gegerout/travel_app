@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travel_app/home/presentation/states/notif_state.dart';
 
-class NotificationPage extends StatelessWidget {
+class NotificationPage extends ConsumerWidget {
   const NotificationPage({Key? key, required this.image}) : super(key: key);
 
   final String image;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -200,6 +202,11 @@ class NotificationPage extends StatelessWidget {
                           hintText: "Title",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: Colors.black.withOpacity(0.63),
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
@@ -215,6 +222,9 @@ class NotificationPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider.notifier).checkName(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -222,9 +232,19 @@ class NotificationPage extends StatelessWidget {
                           hintText: "First Name",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider).isName ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider).isName ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: const Color(0xFF8B8B8B).withOpacity(0.44),
+                                color: ref.watch(checkoutProvider).isName ? Colors.black.withOpacity(0.63) : Colors.red,
                               ),
                               borderRadius: BorderRadius.circular(8)),
                         ),
@@ -237,6 +257,9 @@ class NotificationPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider.notifier).checkSurname(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -244,6 +267,16 @@ class NotificationPage extends StatelessWidget {
                           hintText: "Last Name",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider).isSurname ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider).isSurname ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
@@ -271,6 +304,9 @@ class NotificationPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider.notifier).checkYear(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -286,6 +322,16 @@ class NotificationPage extends StatelessWidget {
                           hintText: "Year",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider).isYear ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider).isYear ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
@@ -302,6 +348,9 @@ class NotificationPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider.notifier).checkMonth(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -317,6 +366,16 @@ class NotificationPage extends StatelessWidget {
                           hintText: "Month",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider).isMonth ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider).isMonth ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
@@ -333,6 +392,9 @@ class NotificationPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider.notifier).checkDay(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -348,6 +410,16 @@ class NotificationPage extends StatelessWidget {
                           hintText: "Day",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider).isDay ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider).isDay ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
