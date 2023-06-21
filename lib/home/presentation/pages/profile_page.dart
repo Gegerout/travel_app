@@ -396,7 +396,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: ref.watch(profileProvider).isValid ? () {
                       ref.read(profileProvider.notifier).updateUser(
                           nameCont.text,
                           surnameCont.text,
@@ -406,7 +406,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                           widget.username,
                           widget.token);
                       ref.refresh(mainProvider).value;
-                    },
+                    } : null,
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
