@@ -23,7 +23,7 @@ class ProfileNotifier extends ChangeNotifier {
     else {
       isName = false;
     }
-    if(isName && isSurname) {
+    if(isName && isSurname && isEmail) {
       isValid = true;
     }
     else {
@@ -39,7 +39,23 @@ class ProfileNotifier extends ChangeNotifier {
     else {
       isSurname = false;
     }
-    if(isName && isSurname) {
+    if(isName && isSurname && isEmail) {
+      isValid = true;
+    }
+    else {
+      isValid = false;
+    }
+    notifyListeners();
+  }
+
+  void checkEmail(String email) {
+    if(RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(email)) {
+      isEmail = true;
+    }
+    else {
+      isEmail = false;
+    }
+    if(isName && isSurname && isEmail) {
       isValid = true;
     }
     else {

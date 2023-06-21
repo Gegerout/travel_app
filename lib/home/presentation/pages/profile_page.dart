@@ -29,13 +29,20 @@ class ProfilePage extends ConsumerStatefulWidget {
 }
 
 class _ProfilePageState extends ConsumerState<ProfilePage> {
+  late TextEditingController nameCont;
+  late TextEditingController surnameCont;
+  late TextEditingController emailCont;
+
+  @override
+  void initState() {
+    super.initState();
+    nameCont = TextEditingController(text: widget.name);
+    surnameCont = TextEditingController(text: widget.surname);
+    emailCont = TextEditingController(text: widget.email);
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameCont = TextEditingController(text: widget.name);
-    TextEditingController surnameCont =
-        TextEditingController(text: widget.surname);
-    TextEditingController emailCont = TextEditingController(text: widget.email);
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -100,7 +107,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       child: TextFormField(
                         controller: nameCont,
                         onChanged: (value) {
-                          //ref.read(checkoutProvider.notifier).checkName(value);
+                          ref.read(profileProvider.notifier).checkName(value);
                         },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
@@ -112,9 +119,13 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(
-                              color: Colors.black.withOpacity(0.63),
-                            ),
-                          ),
+                              color: ref.watch(profileProvider).isName ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(profileProvider).isName ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black.withOpacity(0.63),
@@ -132,7 +143,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       child: TextFormField(
                         controller: surnameCont,
                         onChanged: (value) {
-                          //ref.read(checkoutProvider.notifier).checkSurname(value);
+                          ref.read(profileProvider.notifier).checkSurname(value);
                         },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
@@ -144,9 +155,13 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(
-                              color: Colors.black.withOpacity(0.63),
-                            ),
-                          ),
+                              color: ref.watch(profileProvider).isSurname ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(profileProvider).isSurname ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color:
@@ -296,6 +311,9 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                   ),
                   child: TextFormField(
                     controller: emailCont,
+                    onChanged: (value) {
+                      ref.read(profileProvider.notifier).checkEmail(value);
+                    },
                     style: GoogleFonts.nunito(
                         fontWeight: FontWeight.w500, fontSize: 14),
                     decoration: InputDecoration(
@@ -303,6 +321,16 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       hintText: "Email Id",
                       hintStyle: GoogleFonts.nunito(
                           fontWeight: FontWeight.w500, fontSize: 14),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(
+                          color: ref.watch(profileProvider).isEmail ? Colors.black.withOpacity(0.63) : Colors.red,
+                        ),),
+                      enabledBorder: ref.watch(profileProvider).isEmail ? null : OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(
+                          color: Colors.red,
+                        ),),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: const Color(0xFF8B8B8B).withOpacity(0.44),
