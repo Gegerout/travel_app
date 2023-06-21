@@ -26,6 +26,7 @@ class MyApp extends ConsumerWidget {
           //useMaterial3: true,
         ),
         home: Scaffold(
+          resizeToAvoidBottomInset: false,
           body: ref.watch(mainProvider).when(
               data: (value) {
                 if(value != null) {
