@@ -121,12 +121,16 @@ class HomeWidget extends StatelessWidget {
       "assets/images/list_1.png",
       "assets/images/list_2.png",
       "assets/images/list_3.png",
-      "assets/images/list_4.png"
+      "assets/images/list_4.png",
+      "assets/images/list_5.png",
+      "assets/images/list_6.png"
     ];
 
     final texts = [
       "Amazing\nMaldives",
       "Unknown\nSri lanka",
+      "Romantic\nFrance",
+      "Magical\nSwitzerland",
       "Andaman &\nNicobar Tour",
       "Tokyo",
       "Rs. 45,000/-",
@@ -252,7 +256,7 @@ class HomeWidget extends StatelessWidget {
                 height: 225,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 2,
+                  itemCount: 4,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(right: 16),
@@ -315,19 +319,19 @@ class HomeWidget extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 8, bottom: 8, top: 14),
                             child: Row(
                               children: [
-                                Image.asset(images[index + 2]),
+                                Image.asset(images[index + 4]),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 20),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(texts[index + 2],
+                                      Text(texts[index + 4],
                                           style: GoogleFonts.nunito(
                                               fontWeight: FontWeight.w600,
                                               fontSize: 15,
                                               color: const Color(0xFF5E5E5E))),
                                       const Spacer(),
-                                      Text(texts[index+4], style: GoogleFonts.nunito(fontWeight: FontWeight.w800, fontSize: 13, color: const Color(0xFF5E5E5E))),
+                                      Text(texts[index+6], style: GoogleFonts.nunito(fontWeight: FontWeight.w800, fontSize: 13, color: const Color(0xFF5E5E5E))),
                                     ],
                                   ),
                                 )
