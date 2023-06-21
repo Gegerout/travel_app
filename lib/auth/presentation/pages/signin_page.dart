@@ -148,6 +148,11 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                                       builder: (context) => HomePage(
                                         name: value.firstName,
                                         image: value.image,
+                                        surname: value.lastName,
+                                        email: value.email,
+                                        gender: value.gender,
+                                        username: value.username,
+                                        token: value.token,
                                       )), (route) => false);
                             } else {
                               showDialog(

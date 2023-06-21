@@ -1,5 +1,6 @@
 import 'package:travel_app/auth/data/data_sources/local_data.dart';
 import 'package:travel_app/auth/data/data_sources/remote_data.dart';
+import 'package:travel_app/auth/data/models/user_model.dart';
 import 'package:travel_app/auth/domain/repositories/repository_impl.dart';
 import 'package:travel_app/auth/domain/usecases/user_usecase.dart';
 
@@ -22,5 +23,10 @@ class DataRepository extends Repository {
       return usecase;
     }
     return null;
+  }
+
+  @override
+  Future<void> updateUser(UserModel user) async {
+    await LocalData().updateUser(user);
   }
 }

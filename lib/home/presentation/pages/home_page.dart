@@ -6,10 +6,24 @@ import 'package:travel_app/home/presentation/pages/notification_page.dart';
 import 'package:travel_app/home/presentation/pages/profile_page.dart';
 
 class HomePage extends ConsumerStatefulWidget {
-  const HomePage({Key? key, required this.name, required this.image}) : super(key: key);
+  const HomePage(
+      {Key? key,
+      required this.name,
+      required this.image,
+      required this.surname,
+      required this.email,
+      required this.username,
+      required this.token,
+      required this.gender})
+      : super(key: key);
 
   final String name;
   final String image;
+  final String surname;
+  final String email;
+  final String gender;
+  final String username;
+  final String token;
 
   @override
   ConsumerState<HomePage> createState() => _HomePageState();
@@ -22,9 +36,21 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final pages = [
       HomeWidget(name: widget.name, image: widget.image),
-      ListingPage(image: widget.image,),
-      NotificationPage(image: widget.image,),
-      ProfilePage()
+      ListingPage(
+        image: widget.image,
+      ),
+      NotificationPage(
+        image: widget.image,
+      ),
+      ProfilePage(
+        name: widget.name,
+        surname: widget.surname,
+        image: widget.image,
+        email: widget.email,
+        username: widget.username,
+        gender: widget.gender,
+        token: widget.token,
+      )
     ];
 
     return Scaffold(
@@ -32,9 +58,9 @@ class _HomePageState extends ConsumerState<HomePage> {
       bottomNavigationBar: Container(
         height: 69,
         decoration: const BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))
-        ),
+            color: Colors.black,
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20), topLeft: Radius.circular(20))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -47,9 +73,15 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(currentPage == 0 ? "assets/images/home_active.png" : "assets/images/home.png"),
+                  Image.asset(currentPage == 0
+                      ? "assets/images/home_active.png"
+                      : "assets/images/home.png"),
                   const SizedBox(height: 2),
-                  Text("Home", style: GoogleFonts.nunito(fontWeight: FontWeight.w600, fontSize: 10, color: Colors.white)),
+                  Text("Home",
+                      style: GoogleFonts.nunito(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 10,
+                          color: Colors.white)),
                 ],
               ),
             ),
@@ -62,9 +94,15 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(currentPage == 1 ? "assets/images/listing_active.png" : "assets/images/listing.png"),
+                  Image.asset(currentPage == 1
+                      ? "assets/images/listing_active.png"
+                      : "assets/images/listing.png"),
                   const SizedBox(height: 2),
-                  Text("Listing", style: GoogleFonts.nunito(fontWeight: FontWeight.w600, fontSize: 10, color: Colors.white)),
+                  Text("Listing",
+                      style: GoogleFonts.nunito(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 10,
+                          color: Colors.white)),
                 ],
               ),
             ),
@@ -77,9 +115,15 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(currentPage == 2 ? "assets/images/notif_active.png" : "assets/images/notif.png"),
+                  Image.asset(currentPage == 2
+                      ? "assets/images/notif_active.png"
+                      : "assets/images/notif.png"),
                   const SizedBox(height: 2),
-                  Text("Notification", style: GoogleFonts.nunito(fontWeight: FontWeight.w600, fontSize: 10, color: Colors.white)),
+                  Text("Notification",
+                      style: GoogleFonts.nunito(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 10,
+                          color: Colors.white)),
                 ],
               ),
             ),
@@ -92,9 +136,15 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(currentPage == 3 ? "assets/images/profile_active.png" : "assets/images/profile.png"),
+                  Image.asset(currentPage == 3
+                      ? "assets/images/profile_active.png"
+                      : "assets/images/profile.png"),
                   const SizedBox(height: 2),
-                  Text("Profile", style: GoogleFonts.nunito(fontWeight: FontWeight.w600, fontSize: 10, color: Colors.white)),
+                  Text("Profile",
+                      style: GoogleFonts.nunito(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 10,
+                          color: Colors.white)),
                 ],
               ),
             )
@@ -104,7 +154,6 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 }
-
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key, required this.name, required this.image})
@@ -158,7 +207,9 @@ class _HomeWidgetState extends State<HomeWidget> {
             children: [
               Text("Hello ${widget.name}!!",
                   style: GoogleFonts.nunito(
-                      fontWeight: FontWeight.w700, fontSize: 20, color: Colors.black)),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                      color: Colors.black)),
               Text("Where do you want to go?",
                   style: GoogleFonts.nunito(
                       fontWeight: FontWeight.w500,
@@ -234,7 +285,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                           width: 97,
                           height: 35,
                           decoration: BoxDecoration(
-                              color: currentButton == index ? const Color(0xFFFC8955) : const Color(0xFFF5F5F5),
+                              color: currentButton == index
+                                  ? const Color(0xFFFC8955)
+                                  : const Color(0xFFF5F5F5),
                               borderRadius: BorderRadius.circular(8)),
                           child: Center(
                             child: Text(values[index],
@@ -333,14 +386,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                               color: const Color(0xFFF1F1F1).withOpacity(0.5),
                               borderRadius: BorderRadius.circular(12)),
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 8, bottom: 8, top: 14),
+                            padding: const EdgeInsets.only(
+                                left: 8, bottom: 8, top: 14),
                             child: Row(
                               children: [
                                 Image.asset(images[index + 4]),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(texts[index + 4],
                                           style: GoogleFonts.nunito(
@@ -348,7 +403,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               fontSize: 15,
                                               color: const Color(0xFF5E5E5E))),
                                       const Spacer(),
-                                      Text(texts[index+7], style: GoogleFonts.nunito(fontWeight: FontWeight.w800, fontSize: 13, color: const Color(0xFF5E5E5E))),
+                                      Text(texts[index + 7],
+                                          style: GoogleFonts.nunito(
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 13,
+                                              color: const Color(0xFF5E5E5E))),
                                     ],
                                   ),
                                 )

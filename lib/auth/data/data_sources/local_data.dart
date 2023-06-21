@@ -13,4 +13,10 @@ class LocalData {
     }
     return null;
   }
+
+  Future<void> updateUser(UserModel user) async {
+    var dir = await getTemporaryDirectory();
+    final File file = File("${dir.path}/userData.json");
+    file.writeAsStringSync(json.encode(user));
+  }
 }

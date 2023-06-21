@@ -19,9 +19,7 @@ class MyApp extends ConsumerWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
-          appBarTheme: const AppBarTheme(
-            toolbarHeight: 90
-          ),
+          appBarTheme: const AppBarTheme(toolbarHeight: 90),
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           //useMaterial3: true,
         ),
@@ -29,9 +27,17 @@ class MyApp extends ConsumerWidget {
           resizeToAvoidBottomInset: false,
           body: ref.watch(mainProvider).when(
               data: (value) {
-                if(value != null) {
+                if (value != null) {
                   //return SigninPage();
-                  return HomePage(name: value.data.firstName, image: value.data.image,);
+                  return HomePage(
+                    name: value.data.firstName,
+                    image: value.data.image,
+                    surname: value.data.lastName,
+                    email: value.data.email,
+                    username: value.data.username,
+                    gender: value.data.gender,
+                    token: value.data.token,
+                  );
                 }
                 return const SigninPage();
               },
