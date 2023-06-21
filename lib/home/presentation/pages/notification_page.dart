@@ -560,6 +560,7 @@ class NotificationPage extends StatelessWidget {
                             fontWeight: FontWeight.w700, fontSize: 14)),
                   ],
                 ),
+                const SizedBox(height: 13),
                 Container(
                   width: double.infinity,
                   height: 51,
@@ -570,14 +571,21 @@ class NotificationPage extends StatelessWidget {
                     style: GoogleFonts.nunito(
                         fontWeight: FontWeight.w500, fontSize: 14),
                     decoration: InputDecoration(
-                      suffixIcon: const Icon(
-                        Icons.search,
-                        color: Color(0xFF9F9F9F),
-                      ),
+                      suffixIcon: Image.asset("assets/images/logos_visa.png", width: 28, height: 9,),
                       contentPadding: const EdgeInsets.only(left: 12),
                       hintText: "Credit Card",
                       hintStyle: GoogleFonts.nunito(
                           fontWeight: FontWeight.w500, fontSize: 14),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(
+                            color: Colors.black.withOpacity(0.63),
+                          ),),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(
+                            color: Colors.black.withOpacity(0.63),
+                          ),),
                       border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.black.withOpacity(0.63),
