@@ -121,6 +121,12 @@ class NotificationPage extends StatelessWidget {
                 const SizedBox(width: 17,),
                 Text("Traveller Information", style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 14)),
               ],
+            ),
+            Row(
+              children: [
+                Text("Adult 1", style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 12, color: Colors.black.withOpacity(0.63))),
+                Text("*", style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 12, color: const Color(0xFFFF5757))),
+              ],
             )
           ],
         ),

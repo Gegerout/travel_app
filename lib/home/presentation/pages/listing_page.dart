@@ -2,30 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ListingPage extends StatelessWidget {
+class ListingPage extends StatefulWidget {
   const ListingPage({Key? key, required this.image}) : super(key: key);
 
   final String image;
 
   @override
+  State<ListingPage> createState() => _ListingPageState();
+}
+
+class _ListingPageState extends State<ListingPage> {
+  List images = [
+    "assets/images/dest_1.png",
+    "assets/images/dest_2.png",
+    "assets/images/dest_4.png",
+    "assets/images/dest_3.png",
+    "assets/images/dest_5.png",
+    "assets/images/dest_6.png",
+    "assets/images/dest_7.png",
+  ];
+
+  List texts = [
+    ["Goa", "4.7", false],
+    ["Mahe", "5.0", false],
+    ["Krabi", "4.6", false],
+    ["Phuket", "4.5", false],
+    ["Kerela", "4.7", false],
+    ["Dubai", "4.8", false],
+    ["Costwolds", "4.9", false]
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    final images = [
-      "assets/images/dest_1.png",
-      "assets/images/dest_2.png",
-      "assets/images/dest_4.png",
-      "assets/images/dest_3.png",
-      "assets/images/dest_5.png",
-      "assets/images/dest_6.png",
-      "assets/images/dest_7.png",
-    ];
-
-    final texts = [
-      ["Goa", "4.7"],
-      ["Mahe", "5.0"],
-      ["Krabi", "4.6"],
-      ["Phuket", "4.5"],
-    ];
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -46,7 +54,7 @@ class ListingPage extends StatelessWidget {
                 height: 58,
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
-                    child: Image.network(image)),
+                    child: Image.network(widget.image)),
               ),
             )
           ],
@@ -126,10 +134,14 @@ class ListingPage extends StatelessWidget {
                                                   BorderRadius.circular(30)),
                                           child: IconButton(
                                               padding: EdgeInsets.zero,
-                                              onPressed: () {},
-                                              icon: const Icon(
+                                              onPressed: () {
+                                                setState(() {
+                                                  texts[index][2] = !texts[index][2];
+                                                });
+                                              },
+                                              icon: Icon(
                                                 Icons.favorite,
-                                                color: Color(0xFFFF5757),
+                                                color: texts[index][2] ? const Color(0xFFFF5757) : Colors.white,
                                                 size: 18,
                                               ))),
                                     ),
@@ -190,10 +202,14 @@ class ListingPage extends StatelessWidget {
                                     BorderRadius.circular(30)),
                                 child: IconButton(
                                     padding: EdgeInsets.zero,
-                                    onPressed: () {},
-                                    icon: const Icon(
+                                    onPressed: () {
+                                      setState(() {
+                                        texts[4][2] = !texts[4][2];
+                                      });
+                                    },
+                                    icon: Icon(
                                       Icons.favorite,
-                                      color: Colors.white,
+                                      color: texts[4][2] ? const Color(0xFFFF5757): Colors.white,
                                       size: 18,
                                     ))),
                           ),
@@ -203,7 +219,7 @@ class ListingPage extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 17),
                           child: Align(
                               alignment: Alignment.bottomLeft,
-                              child: Text("Kerela",
+                              child: Text(texts[4][0],
                                   style: GoogleFonts.nunito(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 16,
@@ -218,7 +234,7 @@ class ListingPage extends StatelessWidget {
                               const SizedBox(width: 5,),
                               Padding(
                                 padding: const EdgeInsets.only(top: 2),
-                                child: Text("4.7", style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 10, color: Colors.white)),
+                                child: Text(texts[4][1], style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 10, color: Colors.white)),
                               ),
                             ],
                           ),
@@ -258,10 +274,14 @@ class ListingPage extends StatelessWidget {
                                               BorderRadius.circular(30)),
                                           child: IconButton(
                                               padding: EdgeInsets.zero,
-                                              onPressed: () {},
-                                              icon: const Icon(
+                                              onPressed: () {
+                                                setState(() {
+                                                  texts[5][2] = !texts[5][2];
+                                                });
+                                              },
+                                              icon: Icon(
                                                 Icons.favorite,
-                                                color: Colors.white,
+                                                color: texts[5][2] ? const Color(0xFFFF5757): Colors.white,
                                                 size: 18,
                                               ))),
                                     ),
@@ -274,7 +294,7 @@ class ListingPage extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 17),
                               child: Align(
                                   alignment: Alignment.bottomLeft,
-                                  child: Text("Dubai",
+                                  child: Text(texts[5][0],
                                       style: GoogleFonts.nunito(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 16,
@@ -289,7 +309,7 @@ class ListingPage extends StatelessWidget {
                                   const SizedBox(width: 5,),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 2),
-                                    child: Text("4.8", style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 10, color: Colors.white)),
+                                    child: Text(texts[5][1], style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 10, color: Colors.white)),
                                   ),
                                 ],
                               ),
@@ -326,10 +346,14 @@ class ListingPage extends StatelessWidget {
                                               BorderRadius.circular(30)),
                                           child: IconButton(
                                               padding: EdgeInsets.zero,
-                                              onPressed: () {},
-                                              icon: const Icon(
+                                              onPressed: () {
+                                                setState(() {
+                                                  texts[6][2] = !texts[6][2];
+                                                });
+                                              },
+                                              icon: Icon(
                                                 Icons.favorite,
-                                                color: Colors.white,
+                                                color: texts[6][2] ? const Color(0xFFFF5757): Colors.white,
                                                 size: 18,
                                               ))),
                                     ),
@@ -342,7 +366,7 @@ class ListingPage extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 17),
                               child: Align(
                                   alignment: Alignment.bottomLeft,
-                                  child: Text("Costwolds",
+                                  child: Text(texts[6][0],
                                       style: GoogleFonts.nunito(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 16,
@@ -357,7 +381,7 @@ class ListingPage extends StatelessWidget {
                                   const SizedBox(width: 5,),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 2),
-                                    child: Text("4.9", style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 10, color: Colors.white)),
+                                    child: Text(texts[6][1], style: GoogleFonts.nunito(fontWeight: FontWeight.w700, fontSize: 10, color: Colors.white)),
                                   ),
                                 ],
                               ),
