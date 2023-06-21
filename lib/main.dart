@@ -20,7 +20,7 @@ class MyApp extends ConsumerWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(
-            toolbarHeight: 100
+            toolbarHeight: 90
           ),
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           //useMaterial3: true,
