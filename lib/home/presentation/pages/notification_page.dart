@@ -477,6 +477,9 @@ class NotificationPage extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider2.notifier).checkName(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -484,6 +487,16 @@ class NotificationPage extends ConsumerWidget {
                           hintText: "First Name",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider2).isName ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider2).isName ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
@@ -499,6 +512,9 @@ class NotificationPage extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider2.notifier).checkSurname(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -506,6 +522,16 @@ class NotificationPage extends ConsumerWidget {
                           hintText: "Last Name",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider2).isSurname ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider2).isSurname ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
@@ -533,6 +559,9 @@ class NotificationPage extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider2.notifier).checkYear(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -548,6 +577,16 @@ class NotificationPage extends ConsumerWidget {
                           hintText: "Year",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider2).isYear ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider2).isYear ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
@@ -564,6 +603,9 @@ class NotificationPage extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider2.notifier).checkMonth(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -579,6 +621,16 @@ class NotificationPage extends ConsumerWidget {
                           hintText: "Month",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider2).isMonth ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider2).isMonth ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
@@ -595,6 +647,9 @@ class NotificationPage extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: TextFormField(
+                        onChanged: (value) {
+                          ref.read(checkoutProvider2.notifier).checkDay(value);
+                        },
                         style: GoogleFonts.nunito(
                             fontWeight: FontWeight.w500, fontSize: 14),
                         decoration: InputDecoration(
@@ -610,6 +665,16 @@ class NotificationPage extends ConsumerWidget {
                           hintText: "Day",
                           hintStyle: GoogleFonts.nunito(
                               fontWeight: FontWeight.w500, fontSize: 14),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: ref.watch(checkoutProvider2).isDay ? Colors.black.withOpacity(0.63) : Colors.red,
+                            ),),
+                          enabledBorder: ref.watch(checkoutProvider2).isDay ? null : OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            ),),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: const Color(0xFF8B8B8B).withOpacity(0.44),
